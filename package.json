@@ -1,0 +1,15 @@
+{
+  "name": "mudbot",
+  "version": "1.0.0",
+  "description": "MUDbot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shirish Sarkar",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.5.0",
+    "env": "^0.0.2"
+  }
+}
