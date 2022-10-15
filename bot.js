@@ -1,88 +1,44 @@
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-
-const { Client, GatewayIntentBits} = require('discord.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds]});
+const fs = require('node:fs');
+const path = require('node:path');
+const { Client, Collection, GatewayIntentBits} = require('discord.js');
 const { token } = require('./config.json');
 
+const client = new Client({ intents: [GatewayIntentBits.Guilds]});
+
+client.commands = new Collection();
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	client.commands.set(command.data.name, command);
+}
 
 client.once('ready', () => {
     console.log('Ready!');
+    client.user.setActivity('Standing by...')
 });
 
 client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
-	const { commandName } = interaction;
+    client.user.setActivity('in the Mud :D')
 
-	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-	} else if (commandName === 'server') {
-		await interaction.reply('Server name: ${interaction.guild.name}\nTotal members: ${interaction.guild.memberCount}\nCreated on: ${interaction.guild.createdAt}');
-	} else if (commandName === 'user') {
-		await interaction.reply('Your tag: ${interaction.user.tag}\nYour id: ${interaction.user.id}');
-	} else if (commandName === 'ask') {
-        const question = interaction.options.getString('question');
-        let response = `You asked "${question}", \n`;
+	const command = interaction.client.commands.get(interaction.commandName);
 
-        switch (getRandomInt(10)) {
-            case 0:
-                //interaction.reply(client.message.content);
-                //interaction.reply('You asked, I reply: ')
-                
-                //await interaction.reply('commandUser: ${commandUser}, It is certain!');
-                
-                response += 'It is certain!';
-                break;
-            case 1:
-                //interaction.reply('You asked, I reply: ')
-                //await interaction.reply('commandUser: ${commandUser}, Without a doubt.');
-                response += 'Without a doubt.';
-                break;
-            case 2:
-                //interaction.reply('You asked, I reply: ')
-                response += "Yes, definitely";
-                break;
-            case 3:
-                //interaction.reply('You asked, I reply: ')
-                response += 'As I see it, yes.';
-                break;
-            case 4:
-                //interaction.reply(client.Message.content);
-                response += 'Most likely.';
-                break;
-            case 5:
-                
-                response += 'Outlook good.';
-                break;
-            case 6:
-                
-                response += 'Reply hazy, try again.';
-                break;
-            case 7:
-                
-                response += 'Cannot predict at this time.';
-                break;
-            case 8:
-                
-                response += 'Don’t count on it.';
-                break;
-            case 9:
-                
-                response += 'Outlook not so good.';
-        }
-        interaction.reply(response);
-    }
+    if (!command) return;
+
+	try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+
 });
 
-client.on('message', gotMessage);
-
-function gotMessage(msg) {
-    console.log(msg.content);
-    if (msg.content === 'hello') {
-        msg.reply('Hello User');
-    }
-}
-
+//last always
 client.login(token);
 
