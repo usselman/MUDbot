@@ -41,9 +41,9 @@ module.exports = {
 
 		await interaction.reply(
             '*I flipped a coin landing on:* ' +
-            '**' + result + '**\n'
-            + 'the ratio is: **' + h + '** Heads and **' + t + '** Tails out of **' + total + '** attempts, meaning\n' 
-            + result + ' happens *' + (Math.floor((ratio.toFixed(4))*100)) + '%* of the time.'
+            '**' + result + '.**\n'
+            + 'The ratio is: **' + h + '** Heads and **' + t + '** Tails out of **' + total + '** attempts, meaning\n' 
+            + result + ' happens ***' + (Math.floor((ratio.toFixed(4))*100)) + '%*** of the time.'
             );
 	},
 };
