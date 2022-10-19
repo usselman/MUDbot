@@ -17,11 +17,7 @@ module.exports = {
                 .setRequired(true)),
 	async execute(interaction) {
         const post = interaction.options.getString('post');
-        
         let response = `${post}`;
-        //client.channels.fetch(channels[getRandomInt(channels.length)]);
-        //await interaction.guild.channels.cache.get(channels[getRandomInt(channels.length)]).send({ content: response });
         await interaction.guild.channels.cache.get(channels[getRandomInt(channels.length)]).send({ content: response });
-        //interaction.reply({ content: response, ephemeral: true });
     },
 };
