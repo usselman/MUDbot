@@ -1,6 +1,7 @@
 # MUDbot
 discord bot for MUD Room server
 
+- use /mainframe to post text or URLs into any binary channel
 - use /word to generate word
 - use /number to generate number
 - use /ask to answer yes/no question
