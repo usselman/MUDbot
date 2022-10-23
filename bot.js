@@ -1,7 +1,8 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits} = require('discord.js');
+const { Client, Collection, GatewayIntentBits, messageLink, Message} = require('discord.js');
 const { token } = require('./config.json');
+const { time } = require('node:console');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds]});
 
@@ -19,12 +20,19 @@ for (const file of commandFiles) {
 
 client.once('ready', () => {
     console.log('Ready!');
-    client.user.setActivity('Standing by...')
+	//send i'm online! message in campfire
+	const channel = client.channels.cache.get('1022424180454588416');
+	channel.send('I am online at ' + Date() 
+	+ '! \nCheck <#1010833300396457984> for my commands.');
+    client.user.setActivity('Standing by...');
+	
 });
 
 client.on('interactionCreate', async interaction => {
+	//interaction.guild.channels.cache.get('1014988510702346362').send({ content: 'Hello world!' });
 	if (!interaction.isChatInputCommand()) return;
     client.user.setActivity('in the Mud :D')
+	
 
 	const command = interaction.client.commands.get(interaction.commandName);
 

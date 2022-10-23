@@ -24,7 +24,7 @@ function decimalToHexString(number)
 
 String.prototype.convertToRGB = function(){
   if(this.length != 6){
-      //return "Only six-digit hex colors are allowed.";
+      return "Only six-digit hex colors are allowed.";
   }
 
   var aRgbHex = this.match(/.{1,2}/g);
@@ -43,7 +43,7 @@ module.exports = {
 		.setName('number')
 		.setDescription('MUDBot can generate a number for you!'),
 	async execute(interaction) {
-		let x = getRandomInt(999999);
+		let x = getRandomInt(9999999);
     let isPrime = true;
 
     for (let i = 2; i < x; i++) {
