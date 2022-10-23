@@ -7,7 +7,8 @@ const letters = ['b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n',
 const vowels = ['a', 'e', 'i', 'o', 'u', 'a', 'e', 'o', 'ae', 'ie', 'oa'];
 
 const name1 = ['Jh', 'An', 'Ec', 'En', 'Lh', 'Ha', 'Het', 'Gh', 'Mt', 'Al', 'Olp', 'Elp', 'Em', 
-                'On', 'Tum', 'Tep', 'Pos', 'Cn', 'Kn', 'Del', 'Det', 'Dat',  'Shav', 'Vas', 'Tern', 'Kol', 'Gant', 'Jos', 'Alph', 'Men', 'Tav', 'Olen', 'Mol', 'Godr', 
+                'On', 'Tum', 'Tep', 'Pos', 'Cn', 'Kn', 'Del', 'Det', 'Dat',  'Shav', 'Vas', 'Tern', 'Kol', 'Gant', 
+                'Jos', 'Alph', 'Men', 'Tav', 'Olen', 'Mol', 'Godr', 
                 'Dem', 'Gol', 'Mel', 'Kat', 'Duf', 'Diam', 'Lonn', 'Kohl', 'Elum', 'Alum', 'Palum', 'Oner', 'Anut', 'Hem',
                 'Colm', 'Mol', 'Kolet', 'Uden', 'Umen', 'Amen', 'Akhen', 'Toll', 'Est', 'Kotr'];
 const name2 = ['a', 'o','i', 'y', 'e', 'u', 'ei', 'ul', 'el', 'al', 'at', 'at', 'em', 'im', 'om', 'un', 'oc', 'es', 'il', 'al', 'af', 'of', 'ex', 'ox',

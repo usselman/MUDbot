@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^14.5.0",
+    "dotenv": "^16.0.3",
     "env": "^0.0.2"
   }
 }
