@@ -25,7 +25,7 @@ module.exports = {
 };
 
 async function getAnswer(question) {
-    const url = 'https://api.openai.com/v1/completions';
+    const url = 'https://api.openai.com/v1/chat/completions';
     const data = JSON.stringify({
         prompt: question,
         model: 'gpt-3.5-turbo-0301',
