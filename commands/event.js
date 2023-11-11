@@ -130,12 +130,11 @@ module.exports = {
 
         //await interaction.reply
 
-        const eventText = 'In the histories of old, it is said that: '
-            + 'In the year **' + getRandomInt(1, 30) + ' of the reign of King '
+        const eventText = 'In the year ' + getRandomInt(1, 30) + ' of the reign of King '
             + generateName(getRandomInt(1, 7)).toUpperCase() + suffix[getRandomInt(0, suffix.length)]
             + lastname[getRandomInt(0, lastname.length)] + title[getRandomInt(0, title.length)] + ','
             + 'In the ' + place[getRandomInt(0, place.length)] + ' of ' + generateWord(8).toUpperCase() + ','
-            + '\n' + prefix[getRandomInt(0, prefix.length)] + generateName(getRandomInt(1, 6)).toUpperCase() + suffix[getRandomInt(0, suffix.length)]
+            + prefix[getRandomInt(0, prefix.length)] + generateName(getRandomInt(1, 6)).toUpperCase() + suffix[getRandomInt(0, suffix.length)]
             + lastname[getRandomInt(0, lastname.length)] + title[getRandomInt(0, title.length)] + ', '
             + 'the child of ' + prefix[getRandomInt(0, prefix.length)] + generateName(getRandomInt(1, 6)) + ' and ' + prefix[getRandomInt(0, prefix.length)] + generateName(getRandomInt(1, 6))
             + suffix[getRandomInt(0, suffix.length)] + title[getRandomInt(0, title.length)] + ', '
@@ -153,10 +152,13 @@ module.exports = {
 };
 
 async function getStory(eventText) {
-    const url = 'https://api.openai.com/v1/completions';
+    const url = 'https://api.openai.com/v1/chat/completions';
     const data = JSON.stringify({
-        prompt: eventText,
-        model: 'text-davinci-003',
+        //prompt: eventText,
+        message: [{ "role": "system", "content": "You are a Byzantine historian." },
+        { "role": "user", "content": `What is the story of ${eventText}` },
+        { "role": "assistant", "content": "In the histories of old, these two..." }],
+        model: 'gpt-3.5-turbo',
         max_tokens: 200,
         n: 1,
         stop: '\n'
