@@ -28,8 +28,8 @@ client.once('ready', () => {
 	console.log('Ready!');
 	//send i'm online! message in campfire
 	const channel = client.channels.cache.get('1022424180454588416');
-	// channel.send('I am online at ' + Date()
-	// 	+ '! \nCheck <#1010833300396457984> for my commands.');
+	channel.send('I am online at ' + Date()
+		+ '! \nCheck <#1010833300396457984> for my commands.');
 	client.user.setActivity('Standing by...');
 
 });
@@ -44,11 +44,6 @@ client.on('interactionCreate', async interaction => {
 
 	if (!command) return;
 
-	// const question = interaction.options.getString('question');
-	// const response = await getAnswer(question);
-
-	// interaction.reply({ content: response });
-
 	try {
 		await command.execute(interaction);
 	} catch (error) {
@@ -58,61 +53,8 @@ client.on('interactionCreate', async interaction => {
 
 });
 
-// async function getAnswer(question) {
-// 	const url = 'https://api.openai.com/v1/engines/davinci-codex/completions';
-// 	const data = JSON.stringify({
-// 		prompt: question,
-// 		max_tokens: 100,
-// 		n: 1,
-// 		stop: '\n',
-// 	});
-// 	const options = {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 			Authorization: `Bearer ${process.env.CHATGPT_API_KEY}`,
-// 		},
-// 	};
-
-// 	return new Promise((resolve, reject) => {
-// 		const req = https.request(url, options, (res) => {
-// 			const filePath = path.join(__dirname, 'response.json');
-// 			const fileStream = fs.createWriteStream(filePath);
-
-// 			res.pipe(fileStream);
-// 			fileStream.on('error', (error) => {
-// 				console.error(error);
-// 				reject(error);
-// 			});
-// 			fileStream.on('finish', () => {
-// 				fs.readFile(filePath, (err, data) => {
-// 					if (err) {
-// 						console.error(err);
-// 						reject(err);
-// 						return;
-// 					}
-// 					const response = JSON.parse(data);
-// 					resolve(response.choices[0].text);
-// 					fs.unlink(filePath, (err) => {
-// 						if (err) {
-// 							console.error(err);
-// 						}
-// 					});
-// 				});
-// 			});
-// 		});
-
-// 		req.on('error', (error) => {
-// 			console.error(error);
-// 			reject(error);
-// 		});
-
-// 		req.write(data);
-// 		req.end();
-// 	});
-// }
 
 //last always
 client.login(token);
-//client.login(process.env.DISCORD_TOKEN);
+
 
