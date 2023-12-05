@@ -26,10 +26,10 @@ module.exports = {
 async function getAnswer(question) {
     try {
         const response = await openai.chat.completions.create({
-            model: "gpt-4", // Update the model name as needed
+            model: "gpt-3.5-turbo", // Update the model name as needed
             messages: [{ role: 'system', content: 'You are a helpful assistant.' }, { role: 'user', content: question }],
             temperature: 0.7,
-            max_tokens: 64,
+            max_tokens: 100,
             top_p: 1,
         });
 
