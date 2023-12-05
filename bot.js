@@ -28,8 +28,9 @@ client.once('ready', () => {
 	console.log('Ready!');
 	//send i'm online! message in campfire
 	const channel = client.channels.cache.get('1022424180454588416');
-	channel.send('I am online at ' + Date()
-		+ '! \nCheck <#1010833300396457984> for my commands.');
+	channel.send('testing...');
+	// channel.send('I am online at ' + Date()
+	// 	+ '! \nCheck <#1010833300396457984> for my commands.');
 	client.user.setActivity('Standing by...');
 
 });
