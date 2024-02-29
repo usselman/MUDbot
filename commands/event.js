@@ -141,9 +141,9 @@ module.exports = {
             + ' ' + event[getRandomInt(0, event.length)] + ' ' + prefix[getRandomInt(0, prefix.length)] + generateName(getRandomInt(1, 6)).toUpperCase() + suffix[getRandomInt(0, suffix.length)]
             + lastname[getRandomInt(0, lastname.length)] + title[getRandomInt(0, title.length)] + '.';
 
-        //eventText.toString();
-        //let response = `${eventText} `;
-        const response = await getStory(eventText);
+        eventText.toString();
+        let response = `${eventText} `;
+        //const response = await getStory(eventText);
 
         interaction.reply({ content: response });
 
@@ -151,68 +151,68 @@ module.exports = {
 
 };
 
-async function getStory(eventText) {
-    const url = 'https://api.openai.com/v1/chat/completions';
-    const data = JSON.stringify({
-        //prompt: eventText,
-        message: [{ "role": "system", "content": "You are a Byzantine historian." },
-        { "role": "user", "content": `What is the story of ${eventText}` },
-        { "role": "assistant", "content": "In the histories of old, these two..." }],
-        model: 'gpt-3.5-turbo',
-        max_tokens: 200,
-        n: 1,
-        stop: '\n'
-    });
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.CHATGPT_API_KEY}`,
-        },
-    };
+// async function getStory(eventText) {
+//     const url = 'https://api.openai.com/v1/chat/completions';
+//     const data = JSON.stringify({
+//         //prompt: eventText,
+//         message: [{ "role": "system", "content": "You are a Byzantine historian." },
+//         { "role": "user", "content": `What is the story of ${eventText}` },
+//         { "role": "assistant", "content": "In the histories of old, these two..." }],
+//         model: 'gpt-3.5-turbo',
+//         max_tokens: 200,
+//         n: 1,
+//         stop: '\n'
+//     });
+//     const options = {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             Authorization: `Bearer ${process.env.CHATGPT_API_KEY}`,
+//         },
+//     };
 
-    return new Promise((resolve, reject) => {
-        const req = https.request(url, options, (res) => {
-            const filePath = path.join(__dirname, 'response.json');
-            const fileStream = fs.createWriteStream(filePath);
+//     return new Promise((resolve, reject) => {
+//         const req = https.request(url, options, (res) => {
+//             const filePath = path.join(__dirname, 'response.json');
+//             const fileStream = fs.createWriteStream(filePath);
 
-            res.pipe(fileStream);
-            fileStream.on('error', (error) => {
-                console.error(error);
-                reject(error);
-            });
-            fileStream.on('finish', () => {
-                fs.readFile(filePath, (err, data) => {
-                    if (err) {
-                        console.error(err);
-                        reject(err);
-                        return;
-                    }
-                    const response = JSON.parse(data);
-                    if (!response.choices || response.choices.length === 0 || !response.choices[0].text) {
-                        const error = new Error('Invalid response from API');
-                        console.error(error);
-                        reject(error);
-                    } else {
-                        resolve(response.choices[0].text);
-                    }
-                    console.log(response);
-                    resolve(response.choices[0].text);
-                    fs.unlink(filePath, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                });
-            });
-        });
+//             res.pipe(fileStream);
+//             fileStream.on('error', (error) => {
+//                 console.error(error);
+//                 reject(error);
+//             });
+//             fileStream.on('finish', () => {
+//                 fs.readFile(filePath, (err, data) => {
+//                     if (err) {
+//                         console.error(err);
+//                         reject(err);
+//                         return;
+//                     }
+//                     const response = JSON.parse(data);
+//                     if (!response.choices || response.choices.length === 0 || !response.choices[0].text) {
+//                         const error = new Error('Invalid response from API');
+//                         console.error(error);
+//                         reject(error);
+//                     } else {
+//                         resolve(response.choices[0].text);
+//                     }
+//                     console.log(response);
+//                     resolve(response.choices[0].text);
+//                     fs.unlink(filePath, (err) => {
+//                         if (err) {
+//                             console.error(err);
+//                         }
+//                     });
+//                 });
+//             });
+//         });
 
-        req.on('error', (error) => {
-            console.error(error);
-            reject(error);
-        });
+//         req.on('error', (error) => {
+//             console.error(error);
+//             reject(error);
+//         });
 
-        req.write(data);
-        req.end();
-    });
-}
+//         req.write(data);
+//         req.end();
+//     });
+// }
