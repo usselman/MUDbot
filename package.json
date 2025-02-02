@@ -9,7 +9,7 @@
   "author": "Shirish Sarkar",
   "license": "ISC",
   "engines": {
-    "node": "18.x"
+    "node": "22.x"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
