@@ -1,0 +1,7 @@
+*** Begin Patch
+*** Add File: node_modules/discord-api-types/payloads/v10/autoModeration.js
++// Stub for autoModeration
++// This file has been added using patch-package to work around a packaging issue.
++
++module.exports = {};
+*** End Patch
