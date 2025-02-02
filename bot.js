@@ -5,12 +5,14 @@ const dotenv = require('dotenv');
 dotenv.config();
 const token = process.env.DISCORD_TOKEN;
 
-// It is important to include the GuildMessages intent if you plan to fetch messages.
+// Import node-schedule for scheduling tasks
+const schedule = require('node-schedule');
+
 const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMessages,     // Needed to fetch messages
-		GatewayIntentBits.MessageContent     // Needed if you require access to message content
+		GatewayIntentBits.MessageContent     // Needed to read message content
 	]
 });
 
@@ -50,8 +52,9 @@ client.once('ready', () => {
 	}
 	client.user.setActivity('Standing by...');
 
-	// Schedule the hourly repost function.
-	setInterval(async () => {
+	// Schedule the hourly repost function using node-schedule.
+	// The cron expression '0 * * * *' schedules the job at minute 0 of every hour.
+	schedule.scheduleJob('0 * * * *', async () => {
 		try {
 			// Select one of the mainframe channels at random.
 			const randomChannelId = channels[getRandomInt(channels.length)];
@@ -93,7 +96,7 @@ client.once('ready', () => {
 		} catch (error) {
 			console.error("Error in reposting a random message:", error);
 		}
-	}, 3600000); // 3600000 ms = 1 hour
+	});
 });
 
 client.on('interactionCreate', async interaction => {
