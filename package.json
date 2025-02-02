@@ -8,6 +8,9 @@
   },
   "author": "Shirish Sarkar",
   "license": "ISC",
+  "engines": {
+    "node": "18.x"
+  },
   "dependencies": {
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1",
