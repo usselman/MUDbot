@@ -54,11 +54,14 @@ client.once('ready', () => {
 
 	// Schedule the hourly repost function using node-schedule.
 	// The cron expression '0 * * * *' schedules the job at minute 0 of every hour.
-	schedule.scheduleJob('0 * * *', async () => {
+	schedule.scheduleJob('1 * * *', async () => {
 		try {
+			console.log('Reposting a random message...');
 			// Select one of the mainframe channels at random.
 			const randomChannelId = channels[getRandomInt(channels.length)];
 			const mainframeChannel = client.channels.cache.get(randomChannelId);
+
+			console.log(`Reposting a random message from channel ${randomChannelId}`);
 
 			if (!mainframeChannel) {
 				console.error(`Mainframe channel with ID ${randomChannelId} not found.`);
